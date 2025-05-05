@@ -10,7 +10,9 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(cors({
-  origin: "https://port-folio-1-five.vercel.app", 
+  origin: '*', // Allow all origins for testing
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 
