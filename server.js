@@ -4,6 +4,10 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+
+const PORT = process.env.PORT || 5000;
+
+
 const app = express();
 app.use(cors({
   origin: "https://port-folio-1-five.vercel.app/", 
@@ -53,4 +57,4 @@ app.post("/contact", (req, res) => {
     });
 });
 
-app.listen(5000, () => console.log("Backend running on port 5000"));
+app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
