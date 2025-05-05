@@ -11,18 +11,18 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 //===================== hosted on render =========================
-// app.use(cors({
-//   origin: '*', 
-//   methods: ['GET', 'POST', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization']
-// }));
+app.use(cors({
+  origin: '*', 
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 
 //============================ localhost ===========================
-app.use(cors({
-  origin: "http://localhost:5173", 
-}));
-app.use(express.json());
+// app.use(cors({
+//   origin: "http://localhost:5173", 
+// }));
+// app.use(express.json());
 
 
 
