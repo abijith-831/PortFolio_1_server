@@ -1,0 +1,53 @@
+
+const express = require("express");
+const cors = require("cors");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
+
+const app = express();
+app.use(cors({
+  origin: "http://localhost:5173", 
+  credentials: true,
+}));
+app.use(express.json());
+
+app.post("/contact", (req, res) => {
+  const { firstName, lastName, email, message, phone } = req.body;
+
+  const name = firstName + " " + lastName;
+
+  const mail = {
+    from: name,
+    to: process.env.EMAIL_TO,
+    subject: "Contact Form Submission",
+    html: `
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Message:</strong> ${message}</p>
+    `,
+  };
+
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: true,
+      requireTLS: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    transporter.sendMail(mail, (error) => {
+      if (error) {
+        res.status(500).json({ status: "ERROR", error });
+      } else {
+        res.status(200).json({ status: "Message Sent" });
+      }
+    });
+});
+
+app.listen(5000, () => console.log("Backend running on port 5000"));
