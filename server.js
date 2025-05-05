@@ -12,6 +12,7 @@ app.use(cors({
 app.use(express.json());
 
 app.post("/contact", (req, res) => {
+  console.log("Received contact form submission:", req.body);
   const { firstName, lastName, email, message, phone } = req.body;
 
   const name = firstName + " " + lastName;
