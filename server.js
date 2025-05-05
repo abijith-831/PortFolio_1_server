@@ -16,6 +16,10 @@ app.use(express.json());
 
 console.log('server runnnnnnning');
 
+console.log('emial',process.env.EMAIL_USER);
+console.log('emial',process.env.EMAIL_PASS);
+console.log('emial',process.env.EMAIL_TO);
+
 app.post("/contact", (req, res) => {
   console.log("Received contact form submission:", req.body);
   const { firstName, lastName, email, message, phone } = req.body;
@@ -37,16 +41,11 @@ app.post("/contact", (req, res) => {
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: true,
-      requireTLS: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
-
     transporter.sendMail(mail, (error) => {
       if (error) {
         res.status(500).json({ status: "ERROR", error });
