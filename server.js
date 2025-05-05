@@ -11,6 +11,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
+console.log('server runnnnnnning');
+
 app.post("/contact", (req, res) => {
   console.log("Received contact form submission:", req.body);
   const { firstName, lastName, email, message, phone } = req.body;
