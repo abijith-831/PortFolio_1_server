@@ -9,9 +9,7 @@ const PORT = process.env.PORT || 5000;
 
 
 const app = express();
-app.use(cors({
-  origin: "https://port-folio-1-five.vercel.app"
-}));
+app.use(cors({ origin: "https://port-folio-1-five.vercel.app/", credentials: true }));
 app.use(express.json());
 
 console.log('server runnnnnnning');
