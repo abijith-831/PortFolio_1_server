@@ -9,18 +9,22 @@ const PORT = process.env.PORT || 5000;
 
 
 const app = express();
+
+//===================== hosted on render =========================
 app.use(cors({
-  origin: '*', // Allow all origins for testing
+  origin: '*', 
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+
+//============================ localhost ===========================
+// app.use(cors({
+//   origin: "http://localhost:5173", 
+// }));
 app.use(express.json());
 
-console.log('server runnnnnnning');
 
-console.log('emial',process.env.EMAIL_USER);
-console.log('emial',process.env.EMAIL_PASS);
-console.log('emial',process.env.EMAIL_TO);
 
 app.post("/contact", (req, res) => {
   console.log("Received contact form submission:", req.body);
